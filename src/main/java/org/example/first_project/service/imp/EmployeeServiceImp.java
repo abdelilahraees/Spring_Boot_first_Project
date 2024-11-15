@@ -36,10 +36,27 @@ public class EmployeeServiceImp implements EmployeeService {
     @Override
     public EmployeeDtoReq createEmployee(EmployeeDtoReq req) {
         Employee employee = employeeMapper.toEmployeeEntity(req);
-        employee.setDepartment(departmentMapper.toEntity(req.getDepartment()));
+        employee.getDepartment().setId(req.getDepartment_id());
+        System.out.println(employee.getName());
+        employee = employeeDao.updateEmployee(employee);
+        req = employeeMapper.toEmployeeDtoReq(employee);
+        return req;
+
+    }
+
+    @Override
+    public EmployeeDtoReq updateEmployee(EmployeeDtoReq req) {
+        Employee employee = employeeMapper.toEmployeeEntity(req);
+        employee.getDepartment().setId(req.getDepartment_id());
+        System.out.println(employee.getName());
         employee = employeeDao.createEmployee(employee);
         req = employeeMapper.toEmployeeDtoReq(employee);
         return req;
 
+    }
+
+    @Override
+    public boolean deleteEmployeeById(long id) {
+        return employeeDao.deleteDepartmentById(id);
     }
 }

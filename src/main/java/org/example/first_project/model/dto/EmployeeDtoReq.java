@@ -15,10 +15,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmployeeDtoReq {
+    private long id;
     private String name;
     private String email;
     private double salary;
     private int age;
-    private DepartmentDto department;
+    private long department_id;
 //    private List<Task> tasks;
 }

@@ -33,5 +33,16 @@ public class EmployeeController {
         return employeeService.createEmployee(req);
     }
 
+    @PutMapping("/update-employee")
+    public EmployeeDtoReq updateEmployee(@RequestBody EmployeeDtoReq req) {
+        System.out.println(req.getName());
+        return employeeService.updateEmployee(req);
+    }
+
+    @DeleteMapping("/delete-employee/{id}")
+
+    public boolean deleteEmployee(@PathVariable long id){
+        return employeeService.deleteEmployeeById(id);
+    }
 
 }

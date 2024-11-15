@@ -15,7 +15,6 @@ import java.util.List;
 @Entity
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +43,9 @@ public class Employee {
     private Address address;
 
 
+    public  Employee(){
+        this.department=new Department();
+    }
 
     public Employee(String name, double salary,
                     String email, int age,

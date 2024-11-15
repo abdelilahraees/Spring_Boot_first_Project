@@ -22,7 +22,7 @@ public class Department {
     private String name;
     private String description;
     @JsonManagedReference
-    @OneToMany(mappedBy = "department",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "department")
     private List<Employee> employees;
 
     public Department(String name, String description, List<Employee> employees) {

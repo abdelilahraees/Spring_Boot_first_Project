@@ -27,6 +27,22 @@ public class EmployeeDao {
 
   }
 
+    public Employee updateEmployee(Employee employee) {
+        return employeeRepo.saveAndFlush(employee);
+
+    }
+    public boolean deleteDepartmentById(Long id) {
+        if (employeeRepo.existsById(id)) {
+            try {
+                employeeRepo.deleteById(id);
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+        return false;
+    }
+
 
 
 }

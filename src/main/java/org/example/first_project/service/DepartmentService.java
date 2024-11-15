@@ -11,6 +11,8 @@ import java.util.Optional;
 
 public interface DepartmentService {
     DepartmentDto saveDepartment(DepartmentDto department);
+    DepartmentDto updateDepartment(DepartmentDto department);
     DepartmentDto getDepartmentById(Long id);
     List<Department> getDepartments();
+    boolean deleteDepartmentById(Long id);
 }

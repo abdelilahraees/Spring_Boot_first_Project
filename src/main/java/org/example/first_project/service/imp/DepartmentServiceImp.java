@@ -21,18 +21,33 @@ public class DepartmentServiceImp implements DepartmentService {
 
     @Override
     public DepartmentDto saveDepartment(DepartmentDto department) {
+
+        Department departmentEntity = new Department();
+        departmentEntity.setName(department.getName());
+        departmentEntity.setDescription(department.getDescription());
+        departmentEntity = departmentDao.createDepartment(departmentEntity);
+        return departmentMapper.toDto(departmentEntity);
+    }
+
+    @Override
+    public DepartmentDto updateDepartment(DepartmentDto department) {
         Department departmentEntity = departmentMapper.toEntity(department);
-        departmentEntity=departmentDao.createDepartment(departmentEntity);
+        departmentEntity = departmentDao.createDepartment(departmentEntity);
         return departmentMapper.toDto(departmentEntity);
     }
 
     @Override
     public DepartmentDto getDepartmentById(Long id) {
-       return departmentMapper.toDto(departmentDao.getDepartmentById(id));
+        return departmentMapper.toDto(departmentDao.getDepartmentById(id));
     }
 
     @Override
     public List<Department> getDepartments() {
         return departmentDao.getdepartment();
+    }
+
+    @Override
+    public boolean deleteDepartmentById(Long id) {
+        return departmentDao.deleteDepartmentById(id);
     }
 }
