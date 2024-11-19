@@ -3,14 +3,16 @@ package org.example.first_project.service.imp;
 
 import lombok.RequiredArgsConstructor;
 import org.example.first_project.dao.DepartmentDao;
-import org.example.first_project.model.dto.DepartmentDto;
+import org.example.first_project.model.dto.DepartmentDtoReq;
+import org.example.first_project.model.dto.DepartmentDtoRes;
 import org.example.first_project.model.entity.Department;
+import org.example.first_project.model.entity.Employee;
 import org.example.first_project.model.mapper.DepartmentMapper;
+import org.example.first_project.model.mapper.EmployeeMapper;
 import org.example.first_project.service.DepartmentService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,27 +20,36 @@ public class DepartmentServiceImp implements DepartmentService {
 
     private final DepartmentDao departmentDao;
     private final DepartmentMapper departmentMapper;
+    private final EmployeeMapper employeeMapper;
 
     @Override
-    public DepartmentDto saveDepartment(DepartmentDto department) {
+    public DepartmentDtoRes saveDepartment(DepartmentDtoReq department) {
 
         Department departmentEntity = new Department();
         departmentEntity.setName(department.getName());
         departmentEntity.setDescription(department.getDescription());
         departmentEntity = departmentDao.createDepartment(departmentEntity);
-        return departmentMapper.toDto(departmentEntity);
+        return departmentMapper.toRes(departmentEntity);
     }
 
     @Override
-    public DepartmentDto updateDepartment(DepartmentDto department) {
+    public DepartmentDtoRes updateDepartment(DepartmentDtoReq department) {
         Department departmentEntity = departmentMapper.toEntity(department);
         departmentEntity = departmentDao.createDepartment(departmentEntity);
-        return departmentMapper.toDto(departmentEntity);
+        return departmentMapper.toRes(departmentEntity);
     }
 
     @Override
-    public DepartmentDto getDepartmentById(Long id) {
-        return departmentMapper.toDto(departmentDao.getDepartmentById(id));
+    public DepartmentDtoRes getDepartmentById(long id) {
+        Department entity=departmentDao.getDepartmentById(id);
+        DepartmentDtoRes dto=departmentMapper.toRes(entity);
+
+       if(!entity.getEmployees().isEmpty()){
+           for(Employee emp :entity.getEmployees()){
+               dto.getEmployees().add(employeeMapper.toDtoRes(emp));
+           }
+       }
+        return dto;
     }
 
     @Override

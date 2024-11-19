@@ -1,21 +1,25 @@
 package org.example.first_project.model.mapper;
 
 
-import org.example.first_project.model.dto.DepartmentDto;
+import org.example.first_project.model.dto.DepartmentDtoReq;
+import org.example.first_project.model.dto.DepartmentDtoRes;
 import org.example.first_project.model.entity.Department;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
 
 
-@Component
 @Mapper(componentModel = "spring")
-public interface DepartmentMapper {
+@Component
+public interface
+DepartmentMapper {
 
-    @Mapping(target = "id",source = "id")
-    DepartmentDto toDto(Department department);
+    @Mapping(target = "employees", ignore = true)
+    DepartmentDtoRes toRes(Department department);
 
-    @Mapping(target = "employees",ignore=true)
-    Department toEntity(DepartmentDto departmentDto);
+    @Mapping(target = "employees", ignore = true)
+    Department toEntity(DepartmentDtoReq departmentDto);
+
+    DepartmentDtoReq toReq(DepartmentDtoRes department);
 
 }

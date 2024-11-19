@@ -7,13 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class Department {
 
     @Id
@@ -24,6 +24,9 @@ public class Department {
     @JsonManagedReference
     @OneToMany(mappedBy = "department")
     private List<Employee> employees;
+    public Department(){
+        this.employees=new ArrayList<>();
+    }
 
     public Department(String name, String description, List<Employee> employees) {
         this.name = name;

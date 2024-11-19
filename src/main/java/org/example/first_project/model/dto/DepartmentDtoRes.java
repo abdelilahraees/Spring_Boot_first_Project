@@ -1,18 +1,24 @@
 package org.example.first_project.model.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.example.first_project.model.entity.Employee;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-public class DepartmentDto {
+
+public class DepartmentDtoRes {
     private long id;
     private String name;
     private String description;
-//    private List<Employee> employees;
+    private List<EmployeeDtoRes> employees;
+
+    public DepartmentDtoRes(){
+        this.employees = new ArrayList<>();
+    }
+
+
+
 }

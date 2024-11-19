@@ -23,12 +23,20 @@ public class EmployeeDao {
   }
 
   public Employee createEmployee(Employee employee){
-      return  employeeRepo.save(employee);
+     try {
+         return  employeeRepo.save(employee);
+     }catch (Exception e){
+         return new Employee();
+     }
 
   }
 
     public Employee updateEmployee(Employee employee) {
-        return employeeRepo.saveAndFlush(employee);
+       try{
+           return employeeRepo.saveAndFlush(employee);
+       }catch (Exception e){
+           return new Employee();
+       }
 
     }
     public boolean deleteDepartmentById(Long id) {

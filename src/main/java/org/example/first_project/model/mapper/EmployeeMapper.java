@@ -10,16 +10,13 @@ import org.springframework.stereotype.Component;
 @Component
 @Mapper(componentModel = "spring")
 public interface EmployeeMapper {
+    @Mapping(target = "department",ignore = true)
+    @Mapping(target = "address",ignore = true)
+    Employee toEntity(EmployeeDtoReq req);
 
-    @Mapping(target = "department", ignore = true)
-    Employee toEmployeeEntity(EmployeeDtoReq req);
+    @Mapping(target = "department",ignore = true)
+    @Mapping(target = "address",ignore = true)
+    EmployeeDtoRes toDtoRes(Employee entity);
 
-
-    @Mapping(target = "department", ignore = true)
-    EmployeeDtoRes toEmployeeDtoRes(Employee entity);
-
-
-    @Mapping(target = "department_id", ignore = true)
-    EmployeeDtoReq toEmployeeDtoReq(Employee entity);
 
 }

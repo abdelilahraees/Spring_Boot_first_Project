@@ -16,8 +16,8 @@ public interface EmployeeService {
 
     public EmployeeDtoRes getEmployeeById(Long id);
 
-    public EmployeeDtoReq createEmployee(EmployeeDtoReq employeeDtoReq);
-    public EmployeeDtoReq updateEmployee(EmployeeDtoReq employeeDtoReq);
+    public EmployeeDtoRes createEmployee(EmployeeDtoReq employeeDtoReq);
+    public EmployeeDtoRes updateEmployee(EmployeeDtoReq employeeDtoReq);
 
 
     boolean deleteEmployeeById(long id);

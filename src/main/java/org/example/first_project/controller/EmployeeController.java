@@ -28,14 +28,12 @@ public class EmployeeController {
     }
 
     @PostMapping("/create-employee")
-    public EmployeeDtoReq createEmployee(@RequestBody EmployeeDtoReq req) {
-        System.out.println(req.getName());
+    public EmployeeDtoRes createEmployee(@RequestBody EmployeeDtoReq req) {
         return employeeService.createEmployee(req);
     }
 
     @PutMapping("/update-employee")
-    public EmployeeDtoReq updateEmployee(@RequestBody EmployeeDtoReq req) {
-        System.out.println(req.getName());
+    public EmployeeDtoRes updateEmployee(@RequestBody EmployeeDtoReq req) {
         return employeeService.updateEmployee(req);
     }
 

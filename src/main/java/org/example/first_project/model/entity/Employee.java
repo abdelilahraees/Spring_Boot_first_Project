@@ -15,6 +15,7 @@ import java.util.List;
 @Entity
 @Data
 @AllArgsConstructor
+
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,12 +40,13 @@ public class Employee {
     @ManyToMany(mappedBy = "employees")
     private List<Task> tasks;
     @JsonManagedReference
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(mappedBy = "employee",cascade = CascadeType.PERSIST)
     private Address address;
 
 
     public  Employee(){
-        this.department=new Department();
+
+//        this.department=new Department();
     }
 
     public Employee(String name, double salary,
