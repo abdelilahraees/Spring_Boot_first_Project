@@ -13,6 +13,7 @@ import org.example.first_project.service.DepartmentService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -40,16 +41,19 @@ public class DepartmentServiceImp implements DepartmentService {
     }
 
     @Override
-    public DepartmentDtoRes getDepartmentById(long id) {
-        Department entity=departmentDao.getDepartmentById(id);
-        DepartmentDtoRes dto=departmentMapper.toRes(entity);
+    public Optional<DepartmentDtoRes> getDepartmentById(long id) {
+      if(departmentDao.getDepartmentById(id).isPresent()){
+          Department entity = departmentDao.getDepartmentById(id).get();
+          DepartmentDtoRes dto = departmentMapper.toRes(entity);
 
-       if(!entity.getEmployees().isEmpty()){
-           for(Employee emp :entity.getEmployees()){
-               dto.getEmployees().add(employeeMapper.toDtoRes(emp));
-           }
-       }
-        return dto;
+          if (!entity.getEmployees().isEmpty()) {
+              for (Employee emp : entity.getEmployees()) {
+                  dto.getEmployees().add(employeeMapper.toDtoRes(emp));
+              }
+          }
+          return Optional.ofNullable(dto);
+      }
+        return Optional.ofNullable(null);
     }
 
     @Override
@@ -58,7 +62,20 @@ public class DepartmentServiceImp implements DepartmentService {
     }
 
     @Override
-    public boolean deleteDepartmentById(Long id) {
-        return departmentDao.deleteDepartmentById(id);
+    public boolean isExistById(Long id) {
+        return departmentDao.isExistById(id);
     }
+
+    @Override
+    public boolean deleteDepartmentById(Long id) {
+        if (this.isExistById(id)) {
+            try {
+                departmentDao.deleteDepartmentById(id);
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        } else return false;
+
+  }
 }

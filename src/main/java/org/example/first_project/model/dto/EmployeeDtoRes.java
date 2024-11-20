@@ -10,12 +10,13 @@ import org.example.first_project.model.entity.Address;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmployeeDtoRes {
+    private long id;
     private String name;
     private String email;
     private double salary;
     private int age;
     private DepartmentDtoRes department;
-    private Address address;
+    private AddressDto address;
 
 
 }

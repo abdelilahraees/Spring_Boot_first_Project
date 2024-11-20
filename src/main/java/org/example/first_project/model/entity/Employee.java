@@ -40,7 +40,7 @@ public class Employee {
     @ManyToMany(mappedBy = "employees")
     private List<Task> tasks;
     @JsonManagedReference
-    @OneToOne(mappedBy = "employee",cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "employee")
     private Address address;
 
 

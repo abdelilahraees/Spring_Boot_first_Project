@@ -39,16 +39,12 @@ public class EmployeeDao {
        }
 
     }
-    public boolean deleteDepartmentById(Long id) {
-        if (employeeRepo.existsById(id)) {
-            try {
-                employeeRepo.deleteById(id);
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
-        }
-        return false;
+    public boolean isExistById(Long id){
+      return employeeRepo.existsById(id);
+    }
+    public void deleteDepartmentById(Long id) {
+       employeeRepo.deleteById(id);
+
     }
 
 

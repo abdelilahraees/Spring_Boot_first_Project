@@ -18,6 +18,7 @@ public interface EmployeeService {
 
     public EmployeeDtoRes createEmployee(EmployeeDtoReq employeeDtoReq);
     public EmployeeDtoRes updateEmployee(EmployeeDtoReq employeeDtoReq);
+    boolean isExist(Long id);
 
 
     boolean deleteEmployeeById(long id);

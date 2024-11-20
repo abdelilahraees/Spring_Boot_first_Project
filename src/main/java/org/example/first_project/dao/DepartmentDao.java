@@ -19,9 +19,8 @@ public class DepartmentDao {
 
     }
 
-    public Department getDepartmentById(Long id) {
-            Optional<Department> department = departmentRepo.findById(id);
-            return department.orElseGet(Department::new);
+    public Optional<Department> getDepartmentById(Long id) {
+        return departmentRepo.findById(id);
     }
 
     public Department createDepartment(Department department) {
@@ -32,16 +31,14 @@ public class DepartmentDao {
         return departmentRepo.save(department);
     }
 
-    public boolean deleteDepartmentById(Long id) {
-        if (departmentRepo.existsById(id)) {
-            try {
-                departmentRepo.deleteById(id);
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
-        }
-        return false;
+
+    public boolean isExistById(Long id) {
+        return departmentRepo.existsById(id);
+    }
+
+    public void deleteDepartmentById(Long id) {
+        departmentRepo.deleteById(id);
+
     }
 }
 
